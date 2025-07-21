@@ -12,7 +12,7 @@ import { extractTextFromPdfPage } from "@/utils/pdfReader";
 // serverless function). Your website should call YOUR backend, and YOUR backend will
 // securely add the API key and call the Gemini API.
 // ===================================================================================
-const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY || "AIzaSyA4zIaMH7PJHkHh63saZdd-dAhoFGfIXTU";
+const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY || "AIzaSyCnwEpdvM7GnG_Af28iFULVgINlbhweFss";
 const GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent";
 
 // ===================================================================================
