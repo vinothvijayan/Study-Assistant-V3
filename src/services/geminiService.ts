@@ -16,7 +16,7 @@ Analyze this image for TNPSC (Tamil Nadu Public Service Commission) exam prepara
 
 ${languageInstruction}
 
-Please provide a comprehensive analysis in the following JSON format:
+Please provide a COMPREHENSIVE and DETAILED analysis in the following JSON format:
 {
   "mainTopic": "Main topic of the content",
   "studyPoints": [
@@ -29,7 +29,7 @@ Please provide a comprehensive analysis in the following JSON format:
       "memoryTip": "Easy memory tip for students"
     }
   ],
-  "keyPoints": ["Short crisp point 1", "Short crisp point 2", ...],
+  "keyPoints": ["Short crisp point 1", "Short crisp point 2", "Short crisp point 3", "Short crisp point 4", "Short crisp point 5", "Short crisp point 6", "Short crisp point 7", "Short crisp point 8", "Short crisp point 9", "Short crisp point 10"],
   "summary": "Overall summary of the content",
   "tnpscRelevance": "How this content is relevant for TNPSC exams",
   "tnpscCategories": ["Category1", "Category2", ...],
@@ -37,13 +37,19 @@ Please provide a comprehensive analysis in the following JSON format:
 }
 
 Focus on:
+- Extract MAXIMUM possible key points from the image (aim for 10-15 key points minimum)
+- Create DETAILED study points with comprehensive descriptions
+- MANDATORY: Provide memory tips for EVERY study point to help students remember better
 - TNPSC Group 1, 2, 4 exam relevance
 - Key facts and figures that are easy to memorize
 - Important dates, names, places
 - Conceptual understanding
 - Application in exam context
-- Make key points short and crisp for easy memorization
-- Provide memory tips for better retention
+- Extract ALL important information visible in the image
+- Don't miss any detail that could be relevant for TNPSC preparation
+- Make memory tips creative, using mnemonics, associations, or simple tricks
+
+IMPORTANT: Be thorough and comprehensive. Extract every piece of useful information from the image.
 `;
 
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`, {
@@ -262,17 +268,31 @@ Content: ${textContent}
 
 Please provide analysis in JSON format:
 {
-  "keyPoints": ["Short crisp key point 1", "Short crisp key point 2", ...],
+  "keyPoints": ["Short crisp key point 1", "Short crisp key point 2", "Short crisp key point 3", "Short crisp key point 4", "Short crisp key point 5", "Short crisp key point 6", "Short crisp key point 7", "Short crisp key point 8", "Short crisp key point 9", "Short crisp key point 10"],
+  "studyPoints": [
+    {
+      "title": "Study point title",
+      "description": "Detailed description",
+      "importance": "high/medium/low",
+      "tnpscRelevance": "TNPSC relevance explanation",
+      "memoryTip": "Easy memory tip for students"
+    }
+  ],
   "summary": "Brief summary of the page content",
   "importance": "high/medium/low",
   "tnpscRelevance": "How this content relates to TNPSC exams"
 }
 
 Focus on:
+- Extract COMPREHENSIVE key points from the page (aim for 10+ key points minimum)
+- Create detailed study points with memory tips for better retention
+- MANDATORY: Provide memory tips for every study point
 - TNPSC exam relevance
 - Important facts and concepts
 - Key information for study
-- Make key points short and crisp for easy memorization
+- Extract ALL important information from the page content
+- Don't miss any detail that could be relevant for TNPSC preparation
+- Make memory tips creative and helpful for students
 `;
 
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`, {
@@ -379,13 +399,14 @@ Page ${pageNumber} Content: ${pageContent.substring(0, 4000)}
 
 Please provide analysis in JSON format:
 {
-  "keyPoints": ["Short crisp key point 1", "Short crisp key point 2", "Short crisp key point 3", "Short crisp key point 4", "Short crisp key point 5"],
+  "keyPoints": ["Short crisp key point 1", "Short crisp key point 2", "Short crisp key point 3", "Short crisp key point 4", "Short crisp key point 5", "Short crisp key point 6", "Short crisp key point 7", "Short crisp key point 8", "Short crisp key point 9", "Short crisp key point 10", "Short crisp key point 11", "Short crisp key point 12"],
   "studyPoints": [
     {
       "title": "Study point title",
       "description": "Detailed description",
       "importance": "high/medium/low",
-      "tnpscRelevance": "TNPSC relevance explanation"
+      "tnpscRelevance": "TNPSC relevance explanation",
+      "memoryTip": "Easy memory tip for students"
     }
   ],
   "summary": "Brief summary of the page content",
@@ -394,10 +415,15 @@ Please provide analysis in JSON format:
 }
 
 Focus on:
-- Extract at least 5 short crisp key points per page for easy memorization
+- Extract COMPREHENSIVE key points from the page (aim for 12+ key points minimum)
+- Create detailed study points with comprehensive descriptions
+- MANDATORY: Provide memory tips for EVERY study point to help students remember better
 - TNPSC exam relevance
 - Important facts and concepts
 - Key information for study
+- Extract ALL important information from the page content
+- Don't miss any detail that could be relevant for TNPSC preparation
+- Make memory tips creative, using mnemonics, associations, or simple tricks
 `;
 
         try {
@@ -490,7 +516,7 @@ ${languageInstruction}
 
 Content: ${textContent.substring(0, 8000)}
 
-Please provide a comprehensive analysis in the following JSON format:
+Please provide a COMPREHENSIVE and DETAILED analysis in the following JSON format:
 {
   "mainTopic": "Main topic of the content",
   "studyPoints": [
@@ -503,7 +529,7 @@ Please provide a comprehensive analysis in the following JSON format:
       "memoryTip": "Easy memory tip for students"
     }
   ],
-  "keyPoints": ["Short crisp point 1", "Short crisp point 2", ...],
+  "keyPoints": ["Short crisp point 1", "Short crisp point 2", "Short crisp point 3", "Short crisp point 4", "Short crisp point 5", "Short crisp point 6", "Short crisp point 7", "Short crisp point 8", "Short crisp point 9", "Short crisp point 10", "Short crisp point 11", "Short crisp point 12"],
   "summary": "Overall summary of the content",
   "tnpscRelevance": "How this content is relevant for TNPSC exams",
   "tnpscCategories": ["Category1", "Category2", ...],
@@ -511,13 +537,19 @@ Please provide a comprehensive analysis in the following JSON format:
 }
 
 Focus on:
+- Extract MAXIMUM possible key points from the content (aim for 12+ key points minimum)
+- Create DETAILED study points with comprehensive descriptions
+- MANDATORY: Provide memory tips for EVERY study point to help students remember better
 - TNPSC Group 1, 2, 4 exam relevance
 - Key facts and figures that are easy to memorize
 - Important dates, names, places
 - Conceptual understanding
 - Application in exam context
-- Make key points short and crisp for easy memorization
-- Provide memory tips for better retention
+- Extract ALL important information from the content
+- Don't miss any detail that could be relevant for TNPSC preparation
+- Make memory tips creative, using mnemonics, associations, or simple tricks
+
+IMPORTANT: Be thorough and comprehensive. Extract every piece of useful information from the content.
 `;
 
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`, {
@@ -599,15 +631,16 @@ ${languageInstruction}
 
 Page ${pageNumber} Content: ${textContent.substring(0, 4000)}
 
-Please provide detailed analysis in JSON format:
+Please provide COMPREHENSIVE and DETAILED analysis in JSON format:
 {
-  "keyPoints": ["Short crisp key point 1", "Short crisp key point 2", "Short crisp key point 3", "Short crisp key point 4", "Short crisp key point 5", "Short crisp key point 6", "Short crisp key point 7", "Short crisp key point 8"],
+  "keyPoints": ["Short crisp key point 1", "Short crisp key point 2", "Short crisp key point 3", "Short crisp key point 4", "Short crisp key point 5", "Short crisp key point 6", "Short crisp key point 7", "Short crisp key point 8", "Short crisp key point 9", "Short crisp key point 10", "Short crisp key point 11", "Short crisp key point 12", "Short crisp key point 13", "Short crisp key point 14", "Short crisp key point 15"],
   "studyPoints": [
     {
       "title": "Study point title",
       "description": "Detailed description",
       "importance": "high/medium/low",
-      "tnpscRelevance": "TNPSC relevance explanation"
+      "tnpscRelevance": "TNPSC relevance explanation",
+      "memoryTip": "Easy memory tip for students"
     }
   ],
   "summary": "Brief summary of the page content",
@@ -615,14 +648,21 @@ Please provide detailed analysis in JSON format:
 }
 
 Focus on:
-- Extract at least 8 short crisp key points per page for easy memorization
-- Detailed study points with TNPSC relevance
+- Extract COMPREHENSIVE key points from the page (aim for 15+ key points minimum)
+- Create detailed study points with comprehensive descriptions
+- MANDATORY: Provide memory tips for EVERY study point to help students remember better
+- Detailed study points with TNPSC relevance and memory aids
 - Important facts and concepts
 - Key information for study
 - Names, dates, places, events
 - Definitions and explanations
 - Statistical data and figures
 - Historical context and significance
+- Extract ALL important information from the page content
+- Don't miss any detail that could be relevant for TNPSC preparation
+- Make memory tips creative, using mnemonics, associations, or simple tricks
+
+IMPORTANT: Be thorough and comprehensive. Extract every piece of useful information from the page.
 `;
 
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`, {
