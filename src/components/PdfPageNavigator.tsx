@@ -75,7 +75,7 @@ const PdfPageNavigator = ({
   );
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [quizStartPage, setQuizStartPage] = useState(1);
-  const [quizEndPage, setQuizEndPage] = useState(Math.min(5, totalPages));
+  const [quizEndPage, setQuizEndPage] = useState<number | string>(Math.min(5, totalPages));
   const [difficulty, setDifficulty] = useState("medium");
   
   // Enhanced study history ID management with session storage backup
@@ -402,7 +402,9 @@ const PdfPageNavigator = ({
   };
 
   const handleStartQuiz = () => {
-    onStartQuiz({ start: quizStartPage, end: quizEndPage }, difficulty);
+    const startPage = typeof quizStartPage === 'string' ? 1 : quizStartPage;
+    const endPage = typeof quizEndPage === 'string' ? totalPages : quizEndPage;
+    onStartQuiz({ start: startPage, end: endPage }, difficulty);
   };
 
   const getImportanceColor = (importance: string) => {
@@ -547,8 +549,23 @@ const PdfPageNavigator = ({
                   type="number"
                   min="1"
                   max={totalPages}
-                  defaultValue={currentPage}
-                  onBlur={(e) => navigateToPage(parseInt(e.target.value) || 1)}
+                  value={quizEndPage}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    if (value === '') {
+                      setQuizEndPage('');
+                    } else {
+                      const startPageNum = typeof quizStartPage === 'string' ? 1 : quizStartPage;
+                      setQuizEndPage(Math.max(startPageNum, Math.min(totalPages, parseInt(value) || startPageNum)));
+                    }
+                  }}
+                    const value = e.target.value;
+                    if (value === '') {
+                      setQuizStartPage('');
+                    } else {
+                      setQuizStartPage(Math.max(1, Math.min(totalPages, parseInt(value) || 1)));
+                    }
+                  }}
                   onKeyDown={(e) => { if (e.key === 'Enter') navigateToPage(parseInt(e.currentTarget.value) || 1) }}
                   className="w-16 px-2 py-1 border border-gray-300 rounded text-sm text-center"
                 />

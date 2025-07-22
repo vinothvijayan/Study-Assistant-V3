@@ -23,30 +23,35 @@ const PageRangeSelector = ({
   description,
   isProcessing = false
 }: PageRangeSelectorProps) => {
-  const [startPage, setStartPage] = useState(1);
-  const [endPage, setEndPage] = useState(Math.min(5, totalPages));
+  const [startPage, setStartPage] = useState<number | string>(1);
+  const [endPage, setEndPage] = useState<number | string>(Math.min(5, totalPages));
 
   const handleConfirm = () => {
-    if (startPage < 1 || endPage > totalPages) {
+    const startPageNum = typeof startPage === 'string' ? 1 : startPage;
+    const endPageNum = typeof endPage === 'string' ? totalPages : endPage;
+    
+    if (startPageNum < 1 || endPageNum > totalPages) {
       toast.error(`Page range must be between 1 and ${totalPages}`);
       return;
     }
     
-    if (startPage > endPage) {
+    if (startPageNum > endPageNum) {
       toast.error("Start page cannot be greater than end page");
       return;
     }
 
-    if (endPage - startPage + 1 > 20) {
+    if (endPageNum - startPageNum + 1 > 20) {
       toast.error("Please select a maximum of 20 pages at a time for optimal performance");
       return;
     }
 
-    onConfirm(startPage, endPage);
+    onConfirm(startPageNum, endPageNum);
   };
 
-  const selectedPages = endPage - startPage + 1;
-  const isValidRange = startPage >= 1 && endPage <= totalPages && startPage <= endPage;
+  const startPageNum = typeof startPage === 'string' ? 1 : startPage;
+  const endPageNum = typeof endPage === 'string' ? totalPages : endPage;
+  const selectedPages = endPageNum - startPageNum + 1;
+  const isValidRange = startPageNum >= 1 && endPageNum <= totalPages && startPageNum <= endPageNum;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 p-4">
@@ -104,7 +109,14 @@ const PageRangeSelector = ({
                   min="1"
                   max={totalPages}
                   value={startPage}
-                  onChange={(e) => setStartPage(Math.max(1, parseInt(e.target.value) || 1))}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    if (value === '') {
+                      setStartPage('');
+                    } else {
+                      setStartPage(Math.max(1, parseInt(value) || 1));
+                    }
+                  }}
                   className="input-elegant h-12 text-center text-lg font-semibold"
                 />
               </div>
@@ -117,7 +129,14 @@ const PageRangeSelector = ({
                   min="1"
                   max={totalPages}
                   value={endPage}
-                  onChange={(e) => setEndPage(Math.min(totalPages, parseInt(e.target.value) || 1))}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    if (value === '') {
+                      setEndPage('');
+                    } else {
+                      setEndPage(Math.min(totalPages, parseInt(value) || 1));
+                    }
+                  }}
                   className="input-elegant h-12 text-center text-lg font-semibold"
                 />
               </div>
