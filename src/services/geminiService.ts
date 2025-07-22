@@ -16,6 +16,12 @@ Analyze this image for TNPSC (Tamil Nadu Public Service Commission) exam prepara
 
 ${languageInstruction}
 
+CRITICAL INSTRUCTIONS:
+- Extract ONLY specific, factual, and concrete information directly from the content
+- DO NOT include generic statements about importance or what needs to be studied
+- Focus on actual facts: names, dates, events, definitions, processes, figures, laws, etc.
+- Provide practical memory tips for each study point to help with retention
+
 Please provide a comprehensive analysis in the following JSON format:
 {
   "mainTopic": "Main topic of the content",
@@ -29,7 +35,7 @@ Please provide a comprehensive analysis in the following JSON format:
       "memoryTip": "Easy memory tip for students"
     }
   ],
-  "keyPoints": ["Short crisp point 1", "Short crisp point 2", ...],
+  "keyPoints": ["Specific factual point 1", "Specific factual point 2", ...],
   "summary": "Overall summary of the content",
   "tnpscRelevance": "How this content is relevant for TNPSC exams",
   "tnpscCategories": ["Category1", "Category2", ...],
@@ -38,12 +44,12 @@ Please provide a comprehensive analysis in the following JSON format:
 
 Focus on:
 - TNPSC Group 1, 2, 4 exam relevance
-- Key facts and figures that are easy to memorize
+- Extracting specific facts, figures, names, dates, and definitions
 - Important dates, names, places
 - Conceptual understanding
 - Application in exam context
-- Make key points short and crisp for easy memorization
-- Provide memory tips for better retention
+- Make key points factual and specific from the actual content
+- Provide creative memory tips using mnemonics, associations, or patterns
 `;
 
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`, {
@@ -134,6 +140,12 @@ TNPSC Relevance: ${content.tnpscRelevance}
 Difficulty Level: ${difficulty}
 ${languageInstruction}
 
+CRITICAL INSTRUCTIONS:
+- Generate questions ONLY from the specific facts and information provided in the key points and summary above
+- DO NOT create questions about the importance of content or general study advice
+- Focus on testing factual knowledge, specific details, and understanding of the provided content
+- Questions should test recall of names, dates, events, definitions, and concepts mentioned in the material
+
 Generate ONLY these types of questions:
 - Multiple choice questions (4 options each) - 70%
 - Assertion-Reason questions - 30%
@@ -160,11 +172,11 @@ Return as a JSON array:
 ]
 
 Ensure questions test:
-- Factual knowledge from key points
+- Specific factual knowledge from the provided key points
 - Conceptual understanding  
 - Application ability
 - TNPSC exam pattern relevance
-- Based on the crisp key points provided for easy memorization
+- Based on the actual content and facts provided in the analysis
 
 CRITICAL: Make sure the "answer" field contains only the letter (A, B, C, or D) that corresponds to the correct option.
 `;
@@ -262,7 +274,13 @@ Content: ${textContent}
 
 Please provide analysis in JSON format:
 {
-  "keyPoints": ["Short crisp key point 1", "Short crisp key point 2", ...],
+CRITICAL INSTRUCTIONS:
+- Extract ONLY specific, factual, and concrete information directly from the content
+- DO NOT include generic statements about importance or what needs to be studied
+- Focus on actual facts: names, dates, events, definitions, processes, figures, laws, etc.
+- Provide practical memory tips for each study point to help with retention
+
+  "keyPoints": ["Specific factual point 1", "Specific factual point 2", ...],
   "summary": "Brief summary of the page content",
   "importance": "high/medium/low",
   "tnpscRelevance": "How this content relates to TNPSC exams"
@@ -270,9 +288,9 @@ Please provide analysis in JSON format:
 
 Focus on:
 - TNPSC exam relevance
-- Important facts and concepts
+- Extracting specific facts, names, dates, and concrete information
 - Key information for study
-- Make key points short and crisp for easy memorization
+- Make key points factual and specific from the actual content
 `;
 
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`, {
@@ -379,6 +397,18 @@ Page ${pageNumber} Content: ${pageContent.substring(0, 4000)}
 
 Please provide analysis in JSON format:
 {
+CRITICAL INSTRUCTIONS:
+- Extract ONLY specific, factual, and concrete information directly from the content
+- DO NOT include generic statements about importance or what needs to be studied
+- Focus on actual facts: names, dates, events, definitions, processes, figures, laws, etc.
+- Provide practical memory tips for each study point to help with retention
+
+CRITICAL INSTRUCTIONS:
+- Extract ONLY specific, factual, and concrete information directly from the content
+- DO NOT include generic statements about importance or what needs to be studied
+- Focus on actual facts: names, dates, events, definitions, processes, figures, laws, etc.
+- Provide practical memory tips for each study point to help with retention
+
   "keyPoints": ["Short crisp key point 1", "Short crisp key point 2", "Short crisp key point 3", "Short crisp key point 4", "Short crisp key point 5"],
   "studyPoints": [
     {
@@ -492,6 +522,12 @@ Content: ${textContent.substring(0, 8000)}
 
 Please provide a comprehensive analysis in the following JSON format:
 {
+CRITICAL INSTRUCTIONS:
+- Extract ONLY specific, factual, and concrete information directly from the content
+- DO NOT include generic statements about importance or what needs to be studied
+- Focus on actual facts: names, dates, events, definitions, processes, figures, laws, etc.
+- Provide practical memory tips for each study point to help with retention
+
   "mainTopic": "Main topic of the content",
   "studyPoints": [
     {
@@ -503,7 +539,7 @@ Please provide a comprehensive analysis in the following JSON format:
       "memoryTip": "Easy memory tip for students"
     }
   ],
-  "keyPoints": ["Short crisp point 1", "Short crisp point 2", ...],
+  "keyPoints": ["Specific factual point 1", "Specific factual point 2", ...],
   "summary": "Overall summary of the content",
   "tnpscRelevance": "How this content is relevant for TNPSC exams",
   "tnpscCategories": ["Category1", "Category2", ...],
@@ -512,12 +548,12 @@ Please provide a comprehensive analysis in the following JSON format:
 
 Focus on:
 - TNPSC Group 1, 2, 4 exam relevance
-- Key facts and figures that are easy to memorize
+- Extracting specific facts, figures, names, dates, and definitions
 - Important dates, names, places
 - Conceptual understanding
 - Application in exam context
-- Make key points short and crisp for easy memorization
-- Provide memory tips for better retention
+- Make key points factual and specific from the actual content
+- Provide creative memory tips using mnemonics, associations, or patterns
 `;
 
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`, {
@@ -601,28 +637,30 @@ Page ${pageNumber} Content: ${textContent.substring(0, 4000)}
 
 Please provide detailed analysis in JSON format:
 {
-  "keyPoints": ["Short crisp key point 1", "Short crisp key point 2", "Short crisp key point 3", "Short crisp key point 4", "Short crisp key point 5", "Short crisp key point 6", "Short crisp key point 7", "Short crisp key point 8"],
+  "keyPoints": ["Specific factual point 1", "Specific factual point 2", "Specific factual point 3", "Specific factual point 4", "Specific factual point 5", "Specific factual point 6", "Specific factual point 7", "Specific factual point 8"],
   "studyPoints": [
     {
       "title": "Study point title",
       "description": "Detailed description",
       "importance": "high/medium/low",
-      "tnpscRelevance": "TNPSC relevance explanation"
-    }
+      "tnpscRelevance": "TNPSC relevance explanation",
+      "memoryTip": "Easy memory tip for students"
+  "keyPoints": ["Specific factual point 1", "Specific factual point 2", ...],
   ],
   "summary": "Brief summary of the page content",
   "tnpscRelevance": "How this content relates to TNPSC exams"
 }
 
 Focus on:
-- Extract at least 8 short crisp key points per page for easy memorization
+- Extract at least 8 specific factual key points per page from the actual content
 - Detailed study points with TNPSC relevance
-- Important facts and concepts
+- Specific facts, names, dates, and concrete information
 - Key information for study
-- Names, dates, places, events
+- Make key points factual and specific from the actual content
 - Definitions and explanations
 - Statistical data and figures
 - Historical context and significance
+- Provide creative memory tips using mnemonics, associations, or patterns
 `;
 
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`, {
