@@ -1,20 +1,38 @@
 import jsPDF from 'jspdf';
 
-// Tamil font support - using a web font approach
-const loadTamilFont = async (pdf: jsPDF) => {
-  try {
-    // Use Google Fonts API to get Tamil font
-    const fontUrl = 'https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;700&display=swap';
-    
-    // For now, we'll use the built-in font with better Tamil support
-    // In a production environment, you would want to embed a proper Tamil font
-    pdf.setFont('helvetica', 'normal');
-    
-    return true;
-  } catch (error) {
-    console.warn('Failed to load Tamil font, using fallback:', error);
-    return false;
+// Helper function to detect Tamil text
+const containsTamilText = (text: string): boolean => {
+  return /[\u0B80-\u0BFF]/.test(text);
+};
+
+// Helper function to transliterate Tamil text to readable English
+const transliterateTamil = (text: string): string => {
+  // Basic Tamil to English transliteration mapping
+  const tamilToEnglish: { [key: string]: string } = {
+    'அ': 'a', 'ஆ': 'aa', 'இ': 'i', 'ஈ': 'ii', 'உ': 'u', 'ஊ': 'uu',
+    'எ': 'e', 'ஏ': 'ee', 'ஐ': 'ai', 'ஒ': 'o', 'ஓ': 'oo', 'ஔ': 'au',
+    'க': 'ka', 'ங': 'nga', 'ச': 'cha', 'ஞ': 'nja', 'ட': 'ta', 'ண': 'na',
+    'த': 'tha', 'ன': 'na', 'ப': 'pa', 'ம': 'ma', 'ய': 'ya', 'ர': 'ra',
+    'ல': 'la', 'வ': 'va', 'ழ': 'zha', 'ள': 'la', 'ற': 'ra', 'ன்': 'n'
+  };
+  
+  let transliterated = text;
+  Object.entries(tamilToEnglish).forEach(([tamil, english]) => {
+    transliterated = transliterated.replace(new RegExp(tamil, 'g'), english);
+  });
+  
+  return transliterated;
+};
+
+// Helper function to convert Tamil text to readable format for PDF
+const processTamilText = (text: string): string => {
+  if (!containsTamilText(text)) {
+    return text;
   }
+  
+  // For Tamil text, we'll add both transliteration and a note
+  const transliterated = transliterateTamil(text);
+  return `${transliterated} (Tamil content)`;
 };
 
 // --- NO CHANGE HERE ---
@@ -26,9 +44,6 @@ export interface PDFContent {
 
 export const downloadPDF = async ({ title, content, type }: PDFContent) => {
   const pdf = new jsPDF();
-  
-  // Load Tamil font support
-  await loadTamilFont(pdf);
   
   const pageWidth = pdf.internal.pageSize.getWidth();
   const pageHeight = pdf.internal.pageSize.getHeight();
@@ -45,53 +60,16 @@ export const downloadPDF = async ({ title, content, type }: PDFContent) => {
 
   const addWrappedText = (text: string, x: number, fontSize: number = 12, fontStyle: string = 'normal') => {
     pdf.setFontSize(fontSize);
-    // Enhanced font support for Tamil with better Unicode handling
-    if (/[\u0B80-\u0BFF]/.test(text)) {
-      // Tamil Unicode range detected
-      try {
-        // Try to use a font that better supports Tamil
-        pdf.setFont('helvetica', fontStyle);
-        
-        // Use wider line spacing for Tamil text for better readability
-        const tamilLineHeight = lineHeight * 1.8;
-        
-        // Split text with consideration for Tamil characters
-        const lines = pdf.splitTextToSize(text, pageWidth - 2 * margin);
-        
-        checkNewPage(lines.length * tamilLineHeight + 10);
-        
-        lines.forEach((line: string, index: number) => {
-          // Ensure proper encoding for Tamil text
-          try {
-            pdf.text(line, x, yPosition + (index * tamilLineHeight));
-          } catch (encodingError) {
-            // Fallback: try to render with basic encoding
-            console.warn('Tamil encoding issue, using fallback:', encodingError);
-            const fallbackText = line.replace(/[\u0B80-\u0BFF]/g, '?');
-            pdf.text(fallbackText + ' (Tamil text)', x, yPosition + (index * tamilLineHeight));
-          }
-        });
-        
-        yPosition += lines.length * tamilLineHeight + 8;
-        return lines.length;
-      } catch (error) {
-        console.warn('Tamil font rendering failed, using fallback:', error);
-        // Fallback to regular text processing
-        const lines = pdf.splitTextToSize(text + ' (Tamil content)', pageWidth - 2 * margin);
-        checkNewPage(lines.length * lineHeight + 10);
-        pdf.text(lines, x, yPosition);
-        yPosition += lines.length * lineHeight + 5;
-        return lines.length;
-      }
-    } else {
-      // Regular text handling with improved formatting
-      pdf.setFont('helvetica', fontStyle);
-      const lines = pdf.splitTextToSize(text, pageWidth - 2 * margin);
-      checkNewPage(lines.length * lineHeight + 10);
-      pdf.text(lines, x, yPosition);
-      yPosition += lines.length * lineHeight + 5;
-      return lines.length;
-    }
+    pdf.setFont('helvetica', fontStyle);
+    
+    // Process Tamil text to make it readable in PDF
+    const processedText = processTamilText(text);
+    
+    const lines = pdf.splitTextToSize(processedText, pageWidth - 2 * margin);
+    checkNewPage(lines.length * lineHeight + 10);
+    pdf.text(lines, x, yPosition);
+    yPosition += lines.length * lineHeight + 5;
+    return lines.length;
   };
 
   pdf.setFontSize(20);
