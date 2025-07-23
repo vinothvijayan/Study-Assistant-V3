@@ -87,7 +87,7 @@ export const downloadPDF = async ({ title, content, type }: PDFContent) => {
       // Regular text handling with improved formatting
       pdf.setFont('helvetica', fontStyle);
       const lines = pdf.splitTextToSize(text, pageWidth - 2 * margin);
-      checkNewPage(lines.length * tamilLineHeight + 10);
+      checkNewPage(lines.length * lineHeight + 10);
       pdf.text(lines, x, yPosition);
       yPosition += lines.length * lineHeight + 5;
       return lines.length;
