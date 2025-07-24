@@ -2,7 +2,7 @@
 import * as pdfjsLib from 'pdfjs-dist';
 
 // Set up the worker
-pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js`;
+pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.js';
 
 /**
  * Finds the highest page number from an OCR text string that contains
